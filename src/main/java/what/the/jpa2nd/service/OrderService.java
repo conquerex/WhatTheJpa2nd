@@ -11,6 +11,9 @@ import what.the.jpa2nd.domain.item.Item;
 import what.the.jpa2nd.repository.ItemRepository;
 import what.the.jpa2nd.repository.MemberRepository;
 import what.the.jpa2nd.repository.OrderRepository;
+import what.the.jpa2nd.repository.OrderSearch;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -56,10 +59,8 @@ public class OrderService {
     }
 
     // 검색
-//    public List<Order> findOrders(OrderSearch orderSearch) {
-//        orderRepository.findAll();
-//    }
-
-
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAll(orderSearch);
+    }
 
 }

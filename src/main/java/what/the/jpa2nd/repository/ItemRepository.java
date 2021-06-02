@@ -17,8 +17,8 @@ public class ItemRepository {
         if (item.getId() == null) {
             em.persist(item);
         } else {
-            // item이 있네?
-            // update와 비슷한 것. 추후 본 주석 수정 예정
+            // itemId가 있네?
+            // merge 수행. but item값을 전부 변경. 세팅되지 않은 필드는 null로 update
             em.merge(item);
         }
     }

@@ -82,7 +82,12 @@ public class ItemController {
         book.setAuthor(form.getAuthor());
         book.setIsbn(form.getIsbn());
 
+        // merge가 된다
         itemService.saveItem(book);
+
+        // 위보다 더 좋은 방법
+        // itemService.updateItem(itemId, name, ...);
+
         return "redirect:/items";
 
     }
