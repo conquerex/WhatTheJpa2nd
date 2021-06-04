@@ -45,4 +45,13 @@ public class MemberService {
         return memberRepository.findOne(memberId);
     }
 
+    /**
+     * Member를 return 하지 않는 이유
+     * - 커맨드와 쿼리를 구분
+     */
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
+    }
 }
