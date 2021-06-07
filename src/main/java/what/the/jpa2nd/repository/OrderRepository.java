@@ -71,6 +71,15 @@ public class OrderRepository {
 */
     }
 
+    // fetch 조인 : LAZY 무시하고 객체를 가지고 온다
+    public List<Order> findAllWithMemberDeilvery() {
+        return em.createQuery(
+                "select o from Order o " +
+                        "join fetch o.member m " +
+                        "join fetch o.delivery d ", Order.class
+        ).getResultList();
+    }
+
 
 /*
     public List<Order> findAllByCriteria(OrderSearch orderSearch) {
