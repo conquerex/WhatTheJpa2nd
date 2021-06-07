@@ -22,7 +22,7 @@ public class Member {
     private String name;
 
     // 내장타입
-    @JsonIgnore // API를 통해 노출을 막기 위함
+//    @JsonIgnore // API를 통해 노출을 막기 위함
     @Embedded
     private Address address;
 
