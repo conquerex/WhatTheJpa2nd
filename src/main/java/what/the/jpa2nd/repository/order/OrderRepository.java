@@ -1,10 +1,10 @@
-package what.the.jpa2nd.repository;
+package what.the.jpa2nd.repository.order;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import what.the.jpa2nd.domain.Order;
-
+import what.the.jpa2nd.repository.OrderSearch;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -79,7 +79,6 @@ public class OrderRepository {
                         "join fetch o.delivery d ", Order.class
         ).getResultList();
     }
-
 
 /*
     public List<Order> findAllByCriteria(OrderSearch orderSearch) {

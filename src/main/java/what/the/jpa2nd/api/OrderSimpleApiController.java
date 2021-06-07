@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 import what.the.jpa2nd.domain.Address;
 import what.the.jpa2nd.domain.Order;
 import what.the.jpa2nd.domain.OrderStatus;
-import what.the.jpa2nd.repository.OrderRepository;
 import what.the.jpa2nd.repository.OrderSearch;
+import what.the.jpa2nd.repository.order.OrderRepository;
+import what.the.jpa2nd.repository.order.simplequery.OrderSimpleQueryDto;
+import what.the.jpa2nd.repository.order.simplequery.OrderSimpleQueryRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,7 +25,9 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 public class OrderSimpleApiController {
+
     private final OrderRepository orderRepository;
+    private final OrderSimpleQueryRepository orderSimpleQueryRepository;
 
     @GetMapping("/api/v1/simple-orders")
     public List<Order> orderV1() {
@@ -58,6 +62,11 @@ public class OrderSimpleApiController {
         return orders.stream()
                 .map(SimpleOrderDto::new)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/api/v4/simple-orders")
+    public List<OrderSimpleQueryDto> orderV4() {
+        return orderSimpleQueryRepository.findOrderDtos();
     }
 
     @Data

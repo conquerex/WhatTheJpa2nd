@@ -10,8 +10,8 @@ import what.the.jpa2nd.domain.OrderItem;
 import what.the.jpa2nd.domain.item.Item;
 import what.the.jpa2nd.repository.ItemRepository;
 import what.the.jpa2nd.repository.MemberRepository;
-import what.the.jpa2nd.repository.OrderRepository;
 import what.the.jpa2nd.repository.OrderSearch;
+import what.the.jpa2nd.repository.order.OrderRepository;
 
 import java.util.List;
 

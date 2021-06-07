@@ -14,7 +14,7 @@ import what.the.jpa2nd.domain.OrderStatus;
 import what.the.jpa2nd.domain.item.Book;
 import what.the.jpa2nd.domain.item.Item;
 import what.the.jpa2nd.exception.NotEnoughStockException;
-import what.the.jpa2nd.repository.OrderRepository;
+import what.the.jpa2nd.repository.order.OrderRepository;
 
 import javax.persistence.EntityManager;
 
