@@ -80,6 +80,20 @@ public class OrderRepository {
         ).getResultList();
     }
 
+    public List<Order> findAllWithItem() {
+        /**
+         * [distinct]
+         * JPA에서 중복을 제거해준다. 실제 DB에서는 중복이 그대로 노출된다.
+         */
+        return em.createQuery(
+                "select distinct o from Order o " +
+                        "join fetch o.member m " +
+                        "join fetch o.delivery d " +
+                        "join fetch o.orderItems oi " +
+                        "join fetch oi.item i ", Order.class)
+                .getResultList();
+    }
+
 /*
     public List<Order> findAllByCriteria(OrderSearch orderSearch) {
         // 생략. 안쓸거라서.
