@@ -12,6 +12,8 @@ import what.the.jpa2nd.domain.OrderItem;
 import what.the.jpa2nd.domain.OrderStatus;
 import what.the.jpa2nd.repository.OrderSearch;
 import what.the.jpa2nd.repository.order.OrderRepository;
+import what.the.jpa2nd.repository.order.query.OrderFlatDto;
+import what.the.jpa2nd.repository.order.query.OrderItemQueryDto;
 import what.the.jpa2nd.repository.order.query.OrderQueryDto;
 import what.the.jpa2nd.repository.order.query.OrderQueryRepository;
 
@@ -83,6 +85,29 @@ public class OrderApiController {
     @GetMapping("/api/v4/orders")
     public List<OrderQueryDto> orderV4() {
         return orderQueryRepository.findOrderQueryDtos();
+    }
+
+    @GetMapping("/api/v5/orders")
+    public List<OrderQueryDto> orderV5() {
+        return orderQueryRepository.findAllByDto_optimization();
+    }
+
+    @GetMapping("/api/v6/orders")
+    public List<OrderQueryDto> orderV6() {
+
+        List<OrderFlatDto> flats = orderQueryRepository.findAllByDto_flat();
+
+        // 메모리에서 OrderFlatDto로부터 OrderQueryDto와 OrderItemQueryDto를 뽑아낸다. (분해조립)
+        return flats.stream()
+                .collect(
+                        Collectors.groupingBy(
+                                o -> new OrderQueryDto(o.getOrderId(), o.getName(), o.getOrderDate(), o.getOrderStatus(), o.getAddress()),
+                                Collectors.mapping(
+                                        o -> new OrderItemQueryDto(o.getOrderId(), o.getItemName(), o.getOrderPrice(), o.getCount()),
+                                        Collectors.toList())
+                        )).entrySet().stream()
+                .map(e -> new OrderQueryDto(e.getKey().getOrderId(), e.getKey().getName(), e.getKey().getOrderDate(), e.getKey().getOrderStatus(), e.getKey().getAddress(), e.getValue()))
+                .collect(Collectors.toList());
     }
 
     @Data
