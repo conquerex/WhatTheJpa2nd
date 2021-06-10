@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MemberRepositoryTest {
+public class OldMemberRepositoryTest {
 /*
 
     @Autowired

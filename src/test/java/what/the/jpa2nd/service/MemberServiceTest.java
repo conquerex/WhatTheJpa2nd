@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import what.the.jpa2nd.domain.Member;
-import what.the.jpa2nd.repository.MemberRepository;
+import what.the.jpa2nd.repository.OldMemberRepository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -20,7 +20,7 @@ public class MemberServiceTest {
     @Autowired
     MemberService memberService;
     @Autowired
-    MemberRepository memberRepository;
+    OldMemberRepository oldMemberRepository;
 
     @Test
 //    @Rollback(value = false)
@@ -33,7 +33,7 @@ public class MemberServiceTest {
         Long savedId = memberService.join(member);
 
         // then
-        assertEquals(member, memberRepository.findOne(savedId));
+        assertEquals(member, oldMemberRepository.findOne(savedId));
 
     }
 
